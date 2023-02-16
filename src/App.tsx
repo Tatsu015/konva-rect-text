@@ -32,12 +32,14 @@ const RectText:React.FC<RectProps> = ({x, y, w, h}) => {
 function App() {
   return (
     <>
-    <Stage width={window.innerWidth} height={window.innerHeight}>
+      <div tabIndex={1}  onKeyDown={()=>console.log('aaaaaaaaaaa')}>
+    <Stage width={window.innerWidth} height={window.innerHeight}  >
       <Layer>
         <Text text="Try to drag a rect" />
         <RectText x={100} y={100} w={100} h={100}></RectText>
       </Layer>
     </Stage>
+      </div>
     </>
   );
 }
