@@ -7,21 +7,16 @@ type RectProps = {
   y:number
   w:number
   h:number
+  color:string
+  onClick : ()=>void
 }
 
 const colors = ['red', 'green', 'yellow', 'blue']
 
-const RectText:React.FC<RectProps> = ({x, y, w, h}) => {
-  const [color, setColor] = useState<string>(colors[0])
-  const handleClick = () =>{
-    const c = colors[Math.floor(Math.random() * 4) ]
-    console.log(c);
-    setColor(c)
-  }
-
+const RectText:React.FC<RectProps> = ({x, y, w, h, color,onClick}) => {
   return (
   <>
-  <Group draggable onClick={handleClick}>
+  <Group draggable onClick={onClick}>
     <Rect x={x} y={y} width={w} height={h}  fill={color}/>
     <Text x={x} y={y} width={w} height={h} text="AAAA" fill="rgba(255,255,255,1)" align='center' verticalAlign='middle' fontSize={30} />
     </Group>
@@ -30,13 +25,21 @@ const RectText:React.FC<RectProps> = ({x, y, w, h}) => {
 }
 
 function App() {
+
+  const [color, setColor] = useState<string>(colors[0])
+  const handleClick = () =>{
+    const c = colors[Math.floor(Math.random() * 4) ]
+    console.log(c);
+    setColor(c)
+  }
+
   return (
     <>
       <div tabIndex={1}  onKeyDown={()=>console.log('aaaaaaaaaaa')}>
     <Stage width={window.innerWidth} height={window.innerHeight}  >
       <Layer>
         <Text text="Try to drag a rect" />
-        <RectText x={100} y={100} w={100} h={100}></RectText>
+        <RectText x={100} y={100} w={100} h={100} color={color} onClick={handleClick}></RectText>
       </Layer>
     </Stage>
       </div>
